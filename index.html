@@ -36,7 +36,7 @@
         font-size: 3em;
         font-weight: 300;
         color: #009078;
-        margin-top: 20px;
+        margin-top: 30px; /* Опускаем надпись ниже */
         font-family: 'Press Start 2P', cursive;
     }
 
@@ -46,6 +46,21 @@
         left: 10px;
         width: 100px;
         height: auto;
+        z-index: 1000;
+        cursor: pointer; /* Делаем логотип кликабельным */
+    }
+
+    #reload-icon {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #009078; /* Цвет стрелок */
+        background-color: #f0f0f0; /* Серый фон, как основной фон */
+        border-radius: 50%;
+        padding: 5px;
+        border: none;
         z-index: 1000;
     }
 
@@ -66,14 +81,17 @@
 
 <h1>Игра "Нарисуй круг"</h1>
 <canvas id="game-area"></canvas>
-<p>Идеальность: <span id="percentage">0%</span></p>
+<p style="margin-top: 30px;">Идеальность: <span id="percentage">0%</span></p> <!-- Опускаем надпись ниже -->
 
 <img id="logo" src="logo.png" alt="Логотип">
+<button id="reload-icon">⭮</button> <!-- Минималистичный значок перезагрузки -->
 
 <script>
     const canvas = document.getElementById('game-area');
     const ctx = canvas.getContext('2d');
     const percentageDisplay = document.getElementById('percentage');
+    const reloadIcon = document.getElementById('reload-icon');
+    const logo = document.getElementById('logo');
 
     let points = [];
     let isDrawing = false;
@@ -85,10 +103,30 @@
     canvas.height = canvas.offsetHeight;
 
     function drawCenter() {
+        // Рисуем точку в центре
         ctx.beginPath();
         ctx.arc(center.x, center.y, 2, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0, 144, 120, 0.3)';
         ctx.fill();
+
+        // Добавляем текст "центр круга" как окантовку точки
+        ctx.font = '6px Arial'; // Уменьшаем шрифт
+        ctx.fillStyle = 'rgba(0, 144, 120, 0.5)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        const radius = 8; // Уменьшаем радиус, чтобы текст был ближе к точке
+        const text = "центркруга"; // Убираем пробел между словами
+        const angleStep = (Math.PI * 2) / text.length; // Равномерное распределение букв
+        for (let i = 0; i < text.length; i++) {
+            const angle = i * angleStep + Math.PI; // Поворот на 180 градусов
+            const x = center.x + Math.cos(angle) * radius;
+            const y = center.y + Math.sin(angle) * radius;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle + Math.PI / 2); // Поворот текста
+            ctx.fillText(text[i], 0, 0);
+            ctx.restore();
+        }
     }
 
     function startDrawing(clientX, clientY) {
@@ -123,7 +161,7 @@
             const color = getColorForDeviation(deviation);
 
             ctx.strokeStyle = color;
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 1.5; // Делаем линию тоньше
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.shadowBlur = 3;
@@ -173,8 +211,25 @@
     function getColorForDeviation(deviation) {
         const normalizedDeviation = Math.min(1, deviation / maxDeviationForColor); // Нормализуем отклонение от 0 до 1
         const hue = normalizedDeviation * 120; // Преобразуем отклонение в оттенок (от 0 до 120, где 0 - красный, 120 - зеленый)
-        return `hsl(${120 - hue}, 100%, 50%)`; // Возвращаем цвет в формате HSL (от зеленого к красному)
+        return `hsl(${120 - hue}, 100%, 70%)`; // Делаем цвет светлее
     }
+
+    // Функция для сброса игры
+    function resetGame() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        points = [];
+        percentageDisplay.textContent = "0%";
+        drawCenter();
+    }
+
+    // Закрытие страницы при нажатии на логотип
+    logo.addEventListener('click', () => {
+        if (window.opener) {
+            window.close(); // Закрыть окно, если оно было открыто через JavaScript
+        } else {
+            alert("Закрытие страницы возможно только для окон, открытых через JavaScript.");
+        }
+    });
 
     canvas.addEventListener('mousedown', (e) => {
         startDrawing(e.clientX, e.clientY);
@@ -203,6 +258,8 @@
     canvas.addEventListener('touchend', () => {
         endDrawing();
     });
+
+    reloadIcon.addEventListener('click', resetGame);
 
     drawCenter();
 </script>
