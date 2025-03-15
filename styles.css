@@ -112,7 +112,8 @@ h1 {
     font-family: 'Nunito', sans-serif; /* Основной шрифт */
 }
 
-/* Адаптивность для мобильных устройств */
+
+/* Адаптация для телефонов */
 @media (max-width: 600px) {
     h1 {
         font-size: 1.5em;
@@ -120,5 +121,19 @@ h1 {
 
     #game-area {
         height: 50vh;
+    }
+
+    .number {
+        font-size: 1em;
+    }
+
+    #restart-button {
+        font-size: 1em;
+        padding: 8px 16px;
+    }
+
+    #back-button {
+        font-size: 14px;
+        padding: 4px 8px;
     }
 }
