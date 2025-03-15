@@ -36,7 +36,7 @@ h1 {
     font-family: 'Press Start 2P', cursive;
 }
 
-/* Логотип */
+ /* Логотип */
 #logo {
     position: fixed;
     bottom: 20px;
@@ -46,6 +46,9 @@ h1 {
     z-index: 1000;
     cursor: pointer;
 }
+
+
+
 
 /* Кнопка перезагрузки */
 #reload-icon {
@@ -61,6 +64,7 @@ h1 {
     border: none;
     z-index: 1000;
 }
+
 
 /* Кнопка "Назад" */
 #back-button {
