@@ -1,0 +1,120 @@
+/* Основные стили */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0f0f0; /* Светло-серый фон */
+    color: #333; /* Темно-серый текст */
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+h1 {
+    margin-top: 20px;
+    font-size: 2em;
+    color: #2EA692; /* Зеленый цвет заголовка */
+    font-weight: bold;
+}
+
+/* Игровая область */
+#game-area {
+    position: relative;
+    width: 90%;
+    height: 60vh;
+    margin: 20px auto;
+    border: 2px solid #06DDBA; /* Зеленая рамка */
+    border-radius: 10px;
+    background-color: #fff; /* Белый фон */
+    touch-action: none;
+}
+
+/* Отображение процентов */
+#percentage {
+    font-size: 3em;
+    font-weight: 300;
+    color: #009078; /* Темно-зеленый цвет */
+    margin-top: 30px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Логотип */
+#logo {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 150px; /* Увеличенный размер */
+    height: auto;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+/* Кнопка перезагрузки */
+#reload-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #009078; /* Зеленый цвет */
+    background-color: #f0f0f0; /* Серый фон */
+    border-radius: 50%;
+    padding: 5px;
+    border: none;
+    z-index: 1000;
+}
+
+/* Кнопка "Назад" */
+#back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px; /* Увеличенный размер */
+    cursor: pointer;
+    color: #009078; /* Зеленый цвет */
+    background-color: #f0f0f0; /* Серый фон */
+    border: 1px solid #009078; /* Зеленая рамка */
+    border-radius: 5px;
+    padding: 10px 20px; /* Увеличенный размер */
+    z-index: 1000;
+}
+
+/* Иконка помощи */
+#help-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #009078; /* Зеленый цвет */
+    background-color: #f0f0f0; /* Серый фон */
+    border-radius: 50%;
+    padding: 10px;
+    border: none;
+    z-index: 1000;
+}
+
+/* Стили для подсказки */
+#help-text {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background-color: #2EA692; /* Цвет фона */
+    color: white; /* Цвет текста */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none; /* Скрыт по умолчанию */
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень для выделения */
+    font-family: 'Nunito', sans-serif; /* Основной шрифт */
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    #game-area {
+        height: 50vh;
+    }
+}
