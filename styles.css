@@ -53,8 +53,8 @@ h1 {
 /* Кнопка перезагрузки */
 #reload-icon {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 20px;
+    left: 20px;
     font-size: 24px;
     cursor: pointer;
     color: #009078; /* Зеленый цвет */
