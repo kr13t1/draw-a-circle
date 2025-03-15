@@ -136,6 +136,27 @@ function resetGame() {
     drawCenter();
 }
 
+// Управление значком настроек и подсказкой
+settingsIcon.addEventListener('click', () => {
+    if (settingsTooltip.style.display === 'block') {
+        settingsTooltip.style.display = 'none'; // Скрываем подсказку
+    } else {
+        settingsTooltip.style.display = 'block'; // Показываем подсказку
+    }
+});
+
+// Скрываем подсказку при клике вне её области
+document.addEventListener('click', (event) => {
+    if (event.target !== settingsIcon && event.target !== settingsTooltip) {
+        settingsTooltip.style.display = 'none';
+    }
+});
+
+// Показываем значок настроек при загрузке страницы
+window.addEventListener('load', () => {
+    settingsIcon.classList.add('visible');
+});
+
 // Обработчики событий
 backButton.addEventListener('click', () => {
     window.history.back();
