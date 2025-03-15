@@ -95,15 +95,18 @@ h1 {
 /* Текст подсказки */
 #help-text {
     position: fixed;
-    top: 70px;
-    right: 20px;
-    background-color: #fff; /* Белый фон */
+    top: 50px; /* Отступ сверху */
+    right: 10px; /* Отступ справа */
+    background-color: #2EA692; /* Цвет фона */
+    color: white; /* Цвет текста */
     padding: 10px;
-    border: 1px solid #009078; /* Зеленая рамка */
     border-radius: 5px;
     font-size: 14px;
-    display: none; /* Скрыт по умолчанию */
+    display: none; /* Скрываем по умолчанию */
     z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень для выделения */
+    font-family: 'Nunito', sans-serif; /* Основной шрифт */
+
 }
 
 /* Адаптивность для мобильных устройств */
