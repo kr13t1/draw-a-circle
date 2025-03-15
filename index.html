@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра "Нарисуй круг"</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Игра "Нарисуй круг"</h1>
+ <!-- Значок настроек -->
+ <div id="settings-icon" class="visible">❔</div>
+    <!-- Подсказка -->
+    <div id="settings-tooltip"> Получи приз за идеальный круг (идеальность > 90%)</div>
+
+    <canvas id="game-area"></canvas>
+    <p style="margin-top: 30px;">Идеальность: <span id="percentage">0%</span></p>
+
+    <!-- Логотип и кнопки -->
+    <img id="logo" src="logo.png" alt="Логотип">
+    <button id="reload-icon">⭮</button>
+    <button id="back-button">Назад</button>
+  
+
+    <script src="script.js"></script>
+</body>
+</html>
