@@ -116,9 +116,7 @@ function calculateCircleQuality() {
     });
 
     const averageDeviation = totalDeviation / points.length;
-
-    // Динамическое вычисление допустимого отклонения
-    const maxAllowedDeviation = Math.max(5, perfectRadius * 0.2 * (1 - Math.log1p(perfectRadius) / 10); // Нелинейная зависимость
+    const maxAllowedDeviation = 30;
     const quality = Math.max(0, 100 - (averageDeviation / maxAllowedDeviation) * 100);
     percentageDisplay.textContent = `${Math.round(quality)}%`;
 }
