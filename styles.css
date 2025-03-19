@@ -20,7 +20,7 @@ h1 {
     position: relative;
     width: 90%;
     height: 60vh;
-    margin: 40px auto;
+    margin: 60px auto;
     border: 2px solid #06DDBA; /* Зеленая рамка */
     border-radius: 10px;
     background-color: #fff; /* Белый фон */
@@ -123,9 +123,9 @@ h1 {
 
 #back-button {
     position: fixed; /* Фиксированное позиционирование, чтобы кнопка оставалась на месте при прокрутке */
-    bottom: 120px; /* Отступ от нижнего края окна браузера */
+    bottom: 150px; /* Отступ от нижнего края окна браузера */
     right: 20px; /* Отступ от правого края окна браузера */
-    font-size: 2.2em; /* Размер текста кнопки */
+    font-size: 1.8em; /* Размер текста кнопки */
     cursor: pointer; /* Изменение курсора на указатель при наведении на кнопку */
     color: #009078; /* Цвет текста кнопки */
     background-color: #f0f0f0; /* Цвет фона кнопки */
