@@ -41,7 +41,7 @@ h1 {
     position: absolute;
     top: 20px;
     left: 20px;
-    font-size: 24px;
+    font-size: 44px;
     cursor: pointer;
     color: #009078; /* Зеленый цвет */
     background-color: #f0f0f0; /* Серый фон */
@@ -56,7 +56,7 @@ h1 {
     position: fixed;
     top: 20px;
     right: 20px;
-    font-size: 24px;
+    font-size: 44px;
     cursor: pointer;
     color: #009078; /* Зеленый цвет */
     background-color: #f0f0f0; /* Серый фон */
