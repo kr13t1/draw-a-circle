@@ -192,24 +192,4 @@ reloadIcon.addEventListener('click', resetGame);
 // Инициализация
 drawCenter();
 
-// Получаем элемент игровой области
-const gameArea = document.getElementById('game-area');
 
-// Переменные для отслеживания начальной позиции касания
-let touchStartX = 0;
-
-// Обработчик начала касания
-gameArea.addEventListener('touchstart', (event) => {
-    touchStartX = event.touches[0].clientX; // Фиксируем начальную позицию по оси X
-});
-
-// Обработчик окончания касания
-gameArea.addEventListener('touchend', (event) => {
-    const touchEndX = event.changedTouches[0].clientX; // Фиксируем конечную позицию по оси X
-    const deltaX = touchEndX - touchStartX; // Вычисляем разницу между начальной и конечной позицией
-
-    // Если свайп влево (разница больше 50px), возвращаемся на предыдущую страницу
-    if (deltaX < -50) {
-        window.history.back(); // Возврат на предыдущую страницу
-    }
-});
