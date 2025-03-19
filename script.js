@@ -11,6 +11,7 @@ let isDrawing = false; // Флаг рисования
 let center = { x: canvas.offsetWidth / 2, y: canvas.offsetHeight / 2 }; // Центр холста
 let perfectRadius = 0; // Идеальный радиус круга
 const maxDeviationForColor = 50; // Максимальное отклонение для градиента цвета
+const minDrawingRadius = 20; // Минимальный радиус, внутри которого рисование запрещено
 
 // Установка размеров холста
 canvas.width = canvas.offsetWidth;
@@ -45,52 +46,65 @@ function drawCenter() {
 
 // Начало рисования
 function startDrawing(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+
+    // Проверка, находится ли начальная точка в запрещенной зоне
+    const dx = x - center.x;
+    const dy = y - center.y;
+    const distanceFromCenter = Math.sqrt(dx * dx + dy * dy);
+    if (distanceFromCenter < minDrawingRadius) {
+        return; // Не начинаем рисование, если точка в запрещенной зоне
+    }
+
     isDrawing = true;
     points = [];
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawCenter();
 
-    const rect = canvas.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
     points.push({ x, y });
-
-    const dx = x - center.x;
-    const dy = y - center.y;
-    perfectRadius = Math.sqrt(dx * dx + dy * dy); // Расчет идеального радиуса
+    perfectRadius = distanceFromCenter; // Расчет идеального радиуса
 }
 
 // Рисование линии
 function draw(clientX, clientY) {
-    if (isDrawing) {
-        const rect = canvas.getBoundingClientRect();
-        const x = clientX - rect.left;
-        const y = clientY - rect.top;
-        points.push({ x, y });
+    if (!isDrawing) return;
 
-        const dx = x - center.x;
-        const dy = y - center.y;
-        const currentRadius = Math.sqrt(dx * dx + dy * dy);
-        const deviation = Math.abs(currentRadius - perfectRadius);
+    const rect = canvas.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
 
-        const color = getColorForDeviation(deviation); // Цвет линии в зависимости от отклонения
-
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1.5;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        ctx.shadowBlur = 3;
-        ctx.shadowColor = color;
-
-        if (points.length > 1) {
-            ctx.beginPath();
-            ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
-            ctx.lineTo(x, y);
-            ctx.stroke();
-        }
-
-        calculateCircleQuality(); // Обновление процентов
+    // Проверка, находится ли текущая точка в запрещенной зоне
+    const dx = x - center.x;
+    const dy = y - center.y;
+    const distanceFromCenter = Math.sqrt(dx * dx + dy * dy);
+    if (distanceFromCenter < minDrawingRadius) {
+        return; // Пропускаем рисование, если точка в запрещенной зоне
     }
+
+    points.push({ x, y });
+
+    const currentRadius = distanceFromCenter;
+    const deviation = Math.abs(currentRadius - perfectRadius);
+
+    const color = getColorForDeviation(deviation); // Цвет линии в зависимости от отклонения
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.shadowBlur = 3;
+    ctx.shadowColor = color;
+
+    if (points.length > 1) {
+        ctx.beginPath();
+        ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+
+    calculateCircleQuality(); // Обновление процентов
 }
 
 // Завершение рисования
