@@ -21,12 +21,12 @@ canvas.height = canvas.offsetHeight;
 function drawCenter() {
     ctx.beginPath();
     ctx.arc(center.x, center.y, 2, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0, 144, 120, 0.3)'; // Полупрозрачный зеленый
+    ctx.fillStyle = 'rgba(34, 178, 76, 0.3)'; // Полупрозрачный зеленый
     ctx.fill();
 
     // Добавление текста вокруг центра
     ctx.font = '6px Arial';
-    ctx.fillStyle = 'rgba(0, 144, 120, 0.5)'; // Полупрозрачный зеленый
+    ctx.fillStyle = 'rgba(34, 178, 76, 0.3)'; // Полупрозрачный зеленый
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     const radius = 8;
